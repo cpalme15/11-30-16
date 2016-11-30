@@ -1,0 +1,104 @@
+/*
+ * date: 11/30/16
+ * COSC 111
+ * 2-dimensional array
+ *  Encryption 26 letters in alphabet but 26 can not be put into a 
+ *  square so remove z and make a 5 by 5 square array
+ */
+import java.util.*;
+public class Classwork 
+{
+	public static void main(String[] args){
+		char[][] mystery=new char[5][5];
+		String secret="SHISKOWSKI";
+		Scanner k=new Scanner(System.in);
+		String statement="";
+		fillarray(mystery,secret);
+		displayarray(mystery);
+		System.out.println("Please enter a statement to be encrpyted ");
+		statement=k.nextLine();
+		for(int i =0;i<statement.length();i++)
+		{
+			findltr(mystery,statement.charAt(i));
+		}
+	}
+	public static void findltr(char[][]arr,char ltr)
+	{
+	 int r,c;
+	 for(r=0;r<arr.length;r++)
+	 {
+		 for(c=0;c<arr.length;c++)
+		 {
+			 if(ltr==arr[r][c])
+			 {
+				System.out.print(arr[c][r]); 
+				return;
+			 }
+			 else if(!Character.isLetter(ltr)){
+				 System.out.print(ltr);
+			 return;}
+		 }
+	 }
+	}
+	public static void displayarray(char[][]arr)
+	{
+		int r,c;
+		for (r=0;r<arr.length;r++)
+		{
+			for(c=0;c<arr.length;c++)
+			{
+				System.out.print(arr[r][c]+"\t");
+				
+			}
+			System.out.println();
+		}
+		
+	}
+	public static void fillarray(char[][]arr,String s)
+	{
+		int r=0,c=0,i=0;
+		char ltr=' ';
+		boolean done=false;
+		for(r=0;r<arr.length;r++)
+		{
+			
+			if (done)
+			{
+				r--;
+				break;
+				
+			}
+			for(c=0;c<arr.length;c++)
+			{
+				ltr=s.charAt(i);
+				if(s.substring(0,i).indexOf(ltr)<0)
+					arr[r][c]=ltr;
+
+				else 
+					c--;
+				i++;
+				if(i==s.length())
+				{
+					done=true;
+					break;
+				}
+			}
+		}// second loop
+		
+		for(char ch ='A'; ch<='Y';ch++)
+		{
+			
+			if(s.indexOf(ch)==-1)
+			{
+				c++;
+				c=c%5;
+			   if(c==0)
+				   r++;
+				arr[r][c]=ch;
+				
+			}
+		}
+		// fill the rest of the letters in the array
+		
+	}	// fill array method
+}//class loop
